@@ -83,6 +83,7 @@ const Header = () => {
             />
           </div>
           <Button color="inherit">Login</Button>
+          <Button color="inherit">Profile</Button>
         </Toolbar>
       </AppBar>
     </div>
