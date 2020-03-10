@@ -3,4 +3,9 @@ const setProducts = (data) => ({
     payload: data
 });
 
-export { setProducts };
+const setLogin = (data) => ({
+    type:'LOGIN_SUCCESS',
+    payload: data
+})
+
+export { setProducts, setLogin};

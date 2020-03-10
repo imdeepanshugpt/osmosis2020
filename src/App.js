@@ -3,14 +3,16 @@ import { Router, Route } from 'react-router-dom';
 import Header from './components/header';
 import history from './history';
 import ProductCard from './components/productCard';
+import Profile from './components/profile';
 import { connect } from 'react-redux';
 
-const App = () => {
+const App = (props) => {
   return (
     <div className="App">
-      <Header></Header>
       <Router history={history}>
+        <Header login={props.login}></Header>
         <Route path="/" exact component={ProductCard} />
+        <Route path="/profile" component={Profile} />
       </Router>
     </div>
   );
@@ -18,7 +20,8 @@ const App = () => {
 
 const mapStateToProps = (state) => {
   return {
-    productData: state.search
+    productData: state.search,
+    login: state.login
   }
 }
 

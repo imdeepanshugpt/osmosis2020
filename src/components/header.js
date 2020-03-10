@@ -5,11 +5,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { searchProducts } from '../api/api';
 import { store } from '../index';
+import { Link } from 'react-router-dom'
+import Login from './login';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,22 +60,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props.login);
   const classes = useStyles();
-  
+
   function searchResult(event) {
-    if(event.key === 'Enter'){
+    if (event.key === 'Enter') {
       const data = {
-        "uid":2,
-        "sstring":event.target.value
+        "uid": 2,
+        "sstring": event.target.value
       };
       console.log(data);
       (
-        async () => { 
+        async () => {
           let productsdata = await searchProducts(data)
-          console.log('Products data',productsdata.data);
+          console.log('Products data', productsdata.data);
           store.dispatch({ type: 'SEARCH_PRODUCT', payload: productsdata.data })
-      }
+        }
       )()
     };
   }
@@ -82,7 +85,9 @@ const Header = () => {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <Link to='' >
+              <HomeIcon />
+            </Link>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             ShopCart
@@ -92,7 +97,7 @@ const Header = () => {
               <SearchIcon />
             </div>
             <InputBase
-            onKeyDown={(event) => searchResult(event)}
+              onKeyDown={(event) => searchResult(event)}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
@@ -101,11 +106,23 @@ const Header = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Profile</Button>
+          {
+            props.login ?
+              <>
+                <Button color="inherit" component={Link} to='/profile'>Profile</Button>
+                <Button color="inherit"
+                  onClick={
+                    () => {
+                      store.dispatch({ type: 'LOGIN_SUCCESS', payload: null })
+                    }
+                  }> Logout </Button>
+              </>
+              :
+              <Login></Login>
+          }
         </Toolbar>
       </AppBar>
-    </div>
+    </div >
   );
 }
 

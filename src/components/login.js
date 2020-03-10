@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Input } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { store } from '../index';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -44,6 +45,11 @@ const Login = () => {
         setOpen(false);
     };
 
+    function submitForm(event) {
+        event.preventDefault();
+        store.dispatch({ type: 'LOGIN_SUCCESS', payload: true });
+        handleClose();
+    }
     return (
         <div>
             <Button color="inherit" type="button" onClick={handleOpen}>
@@ -55,14 +61,16 @@ const Login = () => {
                 onClose={handleClose}
             >
                 <div style={modalStyle} className={classes.paper}>
-                    <h2 id="simple-modal-title">Login Please</h2>
-                    <label style={{ margin: '10px' }} for="username">Username</label>
-                    <Input name="username" type="text" margin="dense"></Input>
-                    <br />
-                    <label style={{ margin: '10px' }} for="password">Password</label>
-                    <Input name="password" type="password" margin="dense"></Input>
-                    <br />
-                    <Button color="primary">Login</Button>
+                    <h2 id="simple-modal-title">User Login</h2>
+                    <form onSubmit={(event) => submitForm(event)}>
+                        <label style={{ margin: '10px' }} htmlFor="username">Username</label>
+                        <Input name="username" type="text" margin="dense"></Input>
+                        <br />
+                        <label style={{ margin: '10px' }} htmlFor="password">Password</label>
+                        <Input name="password" type="password" margin="dense"></Input>
+                        <br />
+                        <Button color="primary" type="submit">Login</Button>
+                    </form>
                 </div>
             </Modal>
         </div>
