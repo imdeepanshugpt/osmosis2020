@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import { searchProducts } from '../api/api';
+import { store } from '../index';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,7 +60,23 @@ const useStyles = makeStyles(theme => ({
 
 const Header = () => {
   const classes = useStyles();
-
+  
+  function searchResult(event) {
+    if(event.key === 'Enter'){
+      const data = {
+        "uid":2,
+        "sstring":event.target.value
+      };
+      console.log(data);
+      (
+        async () => { 
+          let productsdata = await searchProducts(data)
+          console.log('Products data',productsdata.data);
+          store.dispatch({ type: 'SEARCH_PRODUCT', payload: productsdata.data })
+      }
+      )()
+    };
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -74,6 +92,7 @@ const Header = () => {
               <SearchIcon />
             </div>
             <InputBase
+            onKeyDown={(event) => searchResult(event)}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,

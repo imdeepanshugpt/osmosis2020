@@ -3,6 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import Header from './components/header';
 import history from './history';
 import ProductCard from './components/productCard';
+import { connect } from 'react-redux';
 
 const App = () => {
   return (
@@ -15,4 +16,10 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    productData: state.search
+  }
+}
+
+export default connect(mapStateToProps, null)(App);
