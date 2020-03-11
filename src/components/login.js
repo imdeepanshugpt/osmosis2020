@@ -47,7 +47,35 @@ const Login = () => {
 
     function submitForm(event) {
         event.preventDefault();
-        store.dispatch({ type: 'LOGIN_SUCCESS', payload: true });
+        const userData = [
+            {
+                "username": "User_1",
+                "search_history": ['casual shirts', 'casual shirts for men', 'allen solly shirts', 'allen solly pants', 'casual checkered shirts for men', 'checkered shirts', 'denim shirts', 'medium size shirts for men', 'blue t-shirt', 'black plain shirt', 'graphic t-shirt', 'black kurta', 'wrangler shirts']
+            },
+            {
+                "username": "User_2",
+                "search_history": ['cycling shorts for women', 'lycra cotton shorts', 'alisha shorts', 'aw bellies', 'bellies for general occasions', 'swimdress', 'swimdress for women', 'loafers for women', 'lingeries', 'lehenga', 'jeans', 'lee jeans', 'boots', 'crocs boots', 'carlton boots', 'bootwale bellies of PU material']
+            },
+            {
+                "username": "User_3",
+                "search_history": ['cars mat', 'engine oil', 'white sneakers', 'toyota innova headlights', 'kids shoes', 'blouse material', 'jeans for boys', 'biker boys t-shirt']
+            },
+            {
+                "username": "User_4",
+                "search_history": ['voylla necklace', 'voylla alloy necklace', 'karatcraft bangle set', 'Awari necklace', 'alloy necklace']
+            }
+        ];
+        let auth = false;
+        userData.map((data) => {
+            if (data.username === event.target[0].value) {
+                auth = true;
+                store.dispatch({ type: 'LOGIN_SUCCESS', payload: { auth: true, user: data.username } });
+            }
+            return data;
+        });
+        if (!auth) {
+            alert('UnAuthorised')
+        }
         handleClose();
     }
     return (

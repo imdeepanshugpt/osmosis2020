@@ -5,12 +5,19 @@ const shopping = axios.create({
 });
 
 const apiPaths = {
-    search: "/mindtree/makeathon/search/v1.0/search"
+    search: "/mindtree/makeathon/search/v1.0/search",
+    userList: "/mindtree/makeathon/search/v1.0/get_users"
 };
 
 const searchProducts = async (data) => {
-    const response  = await shopping.post(apiPaths.search, data);
+    const response = await shopping.post(apiPaths.search, data);
     console.log('response', response);
     return response;
 }
-export { searchProducts };
+
+const getUserList = async () => {
+    const response = await shopping.get(apiPaths.userList);
+    console.log('response', response);
+    return response;
+}
+export { searchProducts, getUserList };

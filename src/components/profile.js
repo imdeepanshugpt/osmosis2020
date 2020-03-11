@@ -2,6 +2,7 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { connect } from 'react-redux';
 
 const userData = [
     {
@@ -15,12 +16,16 @@ const userData = [
     {
         "username": "User_3",
         "search_history": ['cars mat', 'engine oil', 'white sneakers', 'toyota innova headlights', 'kids shoes', 'blouse material', 'jeans for boys', 'biker boys t-shirt']
+    },
+    {
+        "username": "User_4",
+        "search_history": ['voylla necklace', 'voylla alloy necklace', 'karatcraft bangle set', 'Awari necklace', 'alloy necklace']
     }
 ];
-const Profile = () => {
+const Profile = (props) => {
     function renderUserHistory() {
         return userData.map((data) => {
-            if (data.username === 'User_1') {
+            if (props.login && (data.username === props.login.user)) {
                 return data.search_history.map((item) => {
                     return (
                         <ListItem>
@@ -37,10 +42,19 @@ const Profile = () => {
         <div>
             <h1>Your Search History</h1>
             <List>
+                {props.login && props.login.user ?
+                    <h2>User : {props.login.user}</h2>
+                    : ''}
                 {renderUserHistory()}
             </List>
         </div>
     )
 }
 
-export default Profile;
+const mapStateToProps = (state) => {
+    return {
+        productData: state.search,
+        login: state.login
+    }
+}
+export default connect(mapStateToProps, null)(Profile);

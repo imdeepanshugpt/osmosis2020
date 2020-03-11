@@ -55,7 +55,7 @@ const ProductCard = (props) => {
         );
       });
     }
-    return <p>No data</p>;
+    return <h1>Please search...</h1>;
   }
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
