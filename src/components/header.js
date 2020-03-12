@@ -27,17 +27,15 @@ const useStyles = makeStyles(theme => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
+    background: 'white',
+    margin: '10px',
+    color: 'black',
+    border: '2px solid darkgreen'
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -50,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
   inputRoot: {
     color: 'inherit',
+    width:"100%"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -92,20 +91,6 @@ const Header = (props) => {
           <Typography variant="h6" className={classes.title}>
             ShopCart
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              onKeyDown={(event) => searchResult(event)}
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           {
             (props.login && props.login.auth) ?
               <>
@@ -122,6 +107,20 @@ const Header = (props) => {
           }
         </Toolbar>
       </AppBar>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
+        </div>
+        <InputBase
+          onKeyDown={(event) => searchResult(event)}
+          placeholder="Search…"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </div>
     </div >
   );
 }

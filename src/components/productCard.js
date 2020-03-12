@@ -55,10 +55,11 @@ const ProductCard = (props) => {
         );
       });
     }
-    return <h1>Please search...</h1>;
   }
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div style={{
+      display: 'flex', flexWrap: 'wrap', justifyContent: 'center'
+    }}>
       {renderCards()}
     </div>
   );

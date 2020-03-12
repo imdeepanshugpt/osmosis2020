@@ -6,7 +6,9 @@ const shopping = axios.create({
 
 const apiPaths = {
     search: "/mindtree/makeathon/search/v1.0/search",
-    userList: "/mindtree/makeathon/search/v1.0/get_users"
+    userList: "/mindtree/makeathon/search/v1.0/get_users",
+    purchase: "/mindtree/makeathon/search/v1.0/add_purchase",
+    getUserDetails: "/mindtree/makeathon/search/v1.0/get_users_detils"
 };
 
 const searchProducts = async (data) => {

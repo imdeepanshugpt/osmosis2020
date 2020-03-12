@@ -5,14 +5,18 @@ import history from './history';
 import ProductCard from './components/productCard';
 import Profile from './components/profile';
 import { connect } from 'react-redux';
+import Footer from './components/footer';
 
 const App = (props) => {
   return (
     <div className="App">
       <Router history={history}>
         <Header login={props.login}></Header>
-        <Route path="/" exact component={ProductCard} />
-        <Route path="/profile" component={Profile} />
+        <div className="content" style={{ minHeight: '70vh' }}>
+          <Route path="/" exact component={ProductCard} />
+          <Route path="/profile" component={Profile} />
+        </div>
+        <Footer></Footer>
       </Router>
     </div>
   );
